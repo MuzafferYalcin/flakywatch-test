@@ -17,4 +17,10 @@ describe("Flaky tests (intentionally unstable)", () => {
     const shuffled = values.sort(() => Math.random() - 0.5);
     expect(shuffled[0]).toBeLessThan(3);
   });
+
+  test("long-running cost probe", async () => {
+    await new Promise((resolve) => setTimeout(resolve, 45000));
+    const success = Math.random() > 0.4;
+    expect(success).toBe(true);
+  }, 60000);
 });
